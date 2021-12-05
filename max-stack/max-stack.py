@@ -1,6 +1,22 @@
-class MaxStack(object):
+class MaxStack:
 
     def __init__(self):
+        
+
+#     def push(self, x: int) -> None:
+        
+
+#     def pop(self) -> int:
+        
+
+#     def top(self) -> int:
+        
+
+#     def peekMax(self) -> int:
+        
+
+#     def popMax(self) -> int:
+
         self.stack = []
         self.max_stack = []
 
@@ -53,6 +69,8 @@ class MaxStack(object):
             buffer_stack.pop()
             
         return max_num
+
+        
 
 
 # Your MaxStack object will be instantiated and called as such:
