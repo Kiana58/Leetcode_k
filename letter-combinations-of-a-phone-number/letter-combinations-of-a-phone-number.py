@@ -1,36 +1,34 @@
-# put it outside of class
-keyboard = {
-        '2': 'abc',
-        '3': 'def',
-        '4': 'ghi',
-        '5': 'jkl',
-        '6': 'mno',
-        '7': 'pqrs',
-        '8': 'tuv',
-        '9': 'wxyz'
-    }
-class Solution(object):
-    def letterCombinations(self, digits):
-        """
-        :type digits: str
-        :rtype: List[str]
-        """
-        if not digits:
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        dic_num2let = {
+            "2": "abc",
+            "3": "def", 
+            "4": "ghi",
+            "5": "jkl",
+            "6": "mno",
+            "7": "pqrs",
+            "8": "tuv",
+            "9": "wxyz"
+        }
+        
+        # edge case, empty digits
+        if not digits or len(digits) == 0:
             return []
         
-        combinations = []
-        self.dfs(digits, 0, [], combinations)
-        return combinations
-    
-    # the dfs which deal with digits[idx], combinations means current one, combinations are all founded results
-    def dfs(self, digits, idx, combination, combinations):
-        # recurisive outlet
-        if idx == len(digits):
-            combinations.append(''.join(combination))
-            # just one digits, have to return if finished !!!
-            return
+        res = []
+        
+        def backtrack(index, path):
+            if len(path) == len(digits):
+                res.append("".join(path))
+                return
             
-        for letter in keyboard[digits[idx]]:
-            combination.append(letter)
-            self.dfs(digits, idx + 1, combination, combinations)
-            combination.pop()
+            for letter in dic_num2let[digits[index]]:
+                path.append(letter)
+                # move to next digit in digits
+                backtrack(index+1, path)
+                # backtrack by removing the letter before moving onto the next
+                path.pop()
+                
+        backtrack(0, [])
+                
+        return res
